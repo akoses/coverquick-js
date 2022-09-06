@@ -38,7 +38,7 @@ export interface generateResponse {
 }
 export interface matchResponse {
     Experience: {
-        Skills: never[] | {
+        Skills: {
             match_count: number;
             match_total: number;
             matches: [string, any][];
