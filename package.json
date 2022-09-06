@@ -2,10 +2,16 @@
   "name": "coverquick",
   "version": "1.0.0",
   "description": "CoverQuick API JavaScript SDK",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "build": "tsc",
+    "prepublish": "npm run build"
   },
+  
   "author": "Tosin Kuye",
   "license": "ISC",
   "dependencies": {
