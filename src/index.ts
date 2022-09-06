@@ -48,12 +48,12 @@ export interface matchResponse {
         Skills: {
 			match_count: number;
 			match_total: number;
-			matches: [string, any][];
+			matches: [string, string | null][];
 		}
         Roles: [string, string][]
     }
     Education: string,
-    "Years of Experience": any[]
+    YearsOfExperience: [string, string | null, string][]
 }
 
 
