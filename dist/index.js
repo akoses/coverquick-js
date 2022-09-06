@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const configuration_1 = __importDefault(require("./configuration"));
 const request_1 = __importDefault(require("./request"));
 const endpoints_1 = __importDefault(require("./endpoints"));
-[];
 class CoverQuick {
     constructor(api_key) {
         this._api_key = api_key;

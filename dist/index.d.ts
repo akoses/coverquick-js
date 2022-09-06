@@ -50,11 +50,9 @@ export interface matchResponse {
 }
 export interface tailorResponse {
     name: string;
-    bullets: {
-        bullet: string;
-        keyword: string[];
-        tailored_bullet: string;
-    };
+    bullets: tailorBulletResponse[];
+}
+export interface tailorResponses extends Array<tailorResponse> {
 }
 export interface tailorBulletResponse {
     bullet: string;
@@ -77,7 +75,7 @@ declare class CoverQuick {
     classify(description: string): Promise<classifyResponse>;
     generate(resumeId: string, descriptionId: string, questions?: string[]): Promise<generateResponse>;
     match(resumeId: string, descriptionId: string): Promise<matchResponse>;
-    tailor(resumeId: string, descriptionId: string): Promise<tailorResponse>;
+    tailor(resumeId: string, descriptionId: string): Promise<tailorResponses>;
     tailorBullet(bullet: string, keywords: string[]): Promise<tailorBulletResponse>;
     regenerate(regenerationId: string, coverLetter: boolean, questions?: string[]): Promise<regenerateResponse>;
 }
