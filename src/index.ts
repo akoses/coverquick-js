@@ -56,14 +56,13 @@ export interface matchResponse {
     "Years of Experience": any[]
 }
 
+
 export interface tailorResponse {
 	name: string;
-	bullets: {
-		bullet: string;
-		keyword: string[];
-		tailored_bullet: string;
-	}
-}[]
+	bullets: tailorBulletResponse[];
+}
+
+export interface tailorResponses extends Array<tailorResponse> {}
 
 export interface tailorBulletResponse {
 	bullet: string;
@@ -136,9 +135,9 @@ class CoverQuick {
   public async tailor (
 		resumeId: string,
 		descriptionId: string
-  ):Promise<tailorResponse> {
+  ):Promise<tailorResponses> {
 	let res = await this.request.call(endpoints.tailor.method, endpoints.tailor.path, {resume_id:resumeId, classifier_id: descriptionId});
-	return res.data as tailorResponse;
+	return res.data as tailorResponses;
 }
   
   public async tailorBullet(
