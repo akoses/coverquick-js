@@ -45,9 +45,9 @@ class CoverQuick {
             return res.data;
         });
     }
-    generate(resumeId, descriptionId, questions = []) {
+    generate(resumeId, descriptionId, questions = [], experience_level = 1) {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.generate.method, endpoints_1.default.generate.path, { resume_id: resumeId, classifier_id: descriptionId, questions });
+            let res = yield this.request.call(endpoints_1.default.generate.method, endpoints_1.default.generate.path, { resume_id: resumeId, classifier_id: descriptionId, questions, experience_level: experience_level });
             return res.data;
         });
     }

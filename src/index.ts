@@ -118,9 +118,10 @@ class CoverQuick {
   public async generate(
 		resumeId: string,
 		descriptionId: string, 
-		questions: string[] = []
+		questions: string[] = [],
+		experience_level: number = 1,
   ):Promise<generateResponse> {
-	let res = await this.request.call(endpoints.generate.method, endpoints.generate.path, {resume_id:resumeId, classifier_id: descriptionId, questions});
+	let res = await this.request.call(endpoints.generate.method, endpoints.generate.path, {resume_id:resumeId, classifier_id: descriptionId, questions, experience_level:experience_level});
 	return res.data as generateResponse;
 }
 

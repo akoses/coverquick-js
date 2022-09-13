@@ -73,7 +73,7 @@ declare class CoverQuick {
     updateResume(resume: Resume, resumeId: string): Promise<resumeResponse>;
     cache<T>(dataId: string): Promise<T>;
     classify(description: string): Promise<classifyResponse>;
-    generate(resumeId: string, descriptionId: string, questions?: string[]): Promise<generateResponse>;
+    generate(resumeId: string, descriptionId: string, questions?: string[], experience_level?: number): Promise<generateResponse>;
     match(resumeId: string, descriptionId: string): Promise<matchResponse>;
     tailor(resumeId: string, descriptionId: string): Promise<tailorResponses>;
     tailorBullet(bullet: string, keywords: string[]): Promise<tailorBulletResponse>;
