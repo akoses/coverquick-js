@@ -11,6 +11,7 @@ export interface Experience {
     company: string;
     bullets: string[];
     project: boolean;
+    id: string;
 }
 export interface Education {
     school: string;
@@ -50,6 +51,7 @@ export interface matchResponse {
 }
 export interface tailorResponse {
     name: string;
+    id: string;
     bullets: tailorBulletResponse[];
 }
 export interface tailorResponses extends Array<tailorResponse> {

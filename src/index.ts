@@ -15,6 +15,7 @@ export interface Experience {
     company: string
     bullets: string[];
     project: boolean
+	id: string
 }
 
 export interface Education {
@@ -59,6 +60,7 @@ export interface matchResponse {
 
 export interface tailorResponse {
 	name: string;
+	id: string;
 	bullets: tailorBulletResponse[];
 }
 
@@ -68,6 +70,7 @@ export interface tailorBulletResponse {
 	bullet: string;
 	keyword: string[];
 	tailored_bullet: string;
+	
 }
 
 export interface regenerateResponse {
