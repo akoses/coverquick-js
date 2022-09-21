@@ -68,7 +68,7 @@ export interface tailorResponses extends Array<tailorResponse> {}
 
 export interface tailorBulletResponse {
 	bullet: string;
-	keyword: string[];
+	keyword: string;
 	tailored_bullet: string;
 	
 }
@@ -146,9 +146,9 @@ class CoverQuick {
   
   public async tailorBullet(
 		bullet: string,
-		keywords: string[]
+		keyword: string
   ):Promise<tailorBulletResponse> {
-	let res = await this.request.call(endpoints.tailorBullet.method, endpoints.tailorBullet.path, {bullet, keywords});
+	let res = await this.request.call(endpoints.tailorBullet.method, endpoints.tailorBullet.path, {bullet, keyword});
 	return res.data as tailorBulletResponse;
 }
 

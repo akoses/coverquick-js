@@ -63,9 +63,9 @@ class CoverQuick {
             return res.data;
         });
     }
-    tailorBullet(bullet, keywords) {
+    tailorBullet(bullet, keyword) {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.tailorBullet.method, endpoints_1.default.tailorBullet.path, { bullet, keywords });
+            let res = yield this.request.call(endpoints_1.default.tailorBullet.method, endpoints_1.default.tailorBullet.path, { bullet, keyword });
             return res.data;
         });
     }
