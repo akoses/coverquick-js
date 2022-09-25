@@ -1,37 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const endpoints = {
-    cacheResume: {
-        method: "post",
-        path: "/cache/resume"
+    application: {
+        method: 'post',
+        path: '/application'
     },
-    updateResume: (resumeId) => {
-        return { method: "put",
-            path: `/cache/resume/${resumeId}`
-        };
-    },
-    cache: (dataId) => {
-        return {
-            method: "get",
-            path: `/cache/${dataId}`
-        };
-    },
-    classify: {
-        method: "post",
-        path: "/classify"
-    },
-    generate: {
-        method: "post",
-        path: "/generate"
-    },
-    match: {
-        method: "post",
-        path: "/match"
-    },
-    tailor: {
-        method: "post",
-        path: "/tailor"
-    },
+    task: (task_id) => ({
+        method: 'get',
+        path: '/task/' + task_id
+    }),
     tailorBullet: {
         method: "post",
         path: "/tailor/bullet"

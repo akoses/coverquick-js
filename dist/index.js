@@ -15,51 +15,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const configuration_1 = __importDefault(require("./configuration"));
 const request_1 = __importDefault(require("./request"));
 const endpoints_1 = __importDefault(require("./endpoints"));
+var TaskStatus;
+(function (TaskStatus) {
+    TaskStatus["SUCCESS"] = "SUCCESS";
+    TaskStatus["FAILED"] = "FAILURE";
+})(TaskStatus || (TaskStatus = {}));
 class CoverQuick {
-    constructor(api_key) {
+    constructor(api_key = "", url = "https://api.coverquick.co", version = "beta") {
         this._api_key = api_key;
-        this.config = new configuration_1.default(this._api_key);
+        this.config = new configuration_1.default(this._api_key, url, version);
         this.request = new request_1.default(this.config);
     }
-    cacheResume(resume) {
+    application(resume, job_description, experience_level, questions = [], application_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.cacheResume.method, endpoints_1.default.cacheResume.path, resume);
+            let res = yield this.request.call(endpoints_1.default.application.method, endpoints_1.default.application.path, {
+                resume,
+                job_description,
+                experience_level,
+                questions,
+                application_id
+            });
             return res.data;
         });
     }
-    updateResume(resume, resumeId) {
+    task(task_id) {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.updateResume(resumeId).method, endpoints_1.default.updateResume(resumeId).path, resume);
-            return res.data;
-        });
-    }
-    cache(dataId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.cache(dataId).method, endpoints_1.default.cache(dataId).path);
-            return res.data;
-        });
-    }
-    classify(description) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.classify.method, endpoints_1.default.classify.path, { description });
-            return res.data;
-        });
-    }
-    generate(resumeId, descriptionId, questions = [], experience_level = 1) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.generate.method, endpoints_1.default.generate.path, { resume_id: resumeId, classifier_id: descriptionId, questions, experience_level: experience_level });
-            return res.data;
-        });
-    }
-    match(resumeId, descriptionId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.match.method, endpoints_1.default.match.path, { resume_id: resumeId, classifier_id: descriptionId });
-            return res.data;
-        });
-    }
-    tailor(resumeId, descriptionId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.tailor.method, endpoints_1.default.tailor.path, { resume_id: resumeId, classifier_id: descriptionId });
+            let res = yield this.request.call(endpoints_1.default.task(task_id).method, endpoints_1.default.task(task_id).path);
             return res.data;
         });
     }

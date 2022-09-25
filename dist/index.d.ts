@@ -23,45 +23,35 @@ export interface Skills {
     name: string;
     years_of_experience: number;
 }
-export interface resumeResponse {
-    resume_id: string;
+export interface ApplicationResponse {
+    task_id: string;
+    task_status: string;
 }
-export interface classifyResponse {
-    classifier_id: string;
+declare enum TaskStatus {
+    SUCCESS = "SUCCESS",
+    FAILED = "FAILURE"
 }
-export interface generateResponse {
-    regeneration_id: string;
-    cover_letter: string;
-    questions: {
-        question: string;
-        answer: string;
-    }[];
+export interface TaskResult {
+    STATUS: TaskStatus;
 }
-export interface matchResponse {
-    Experience: {
-        Skills: {
-            match_count: number;
-            match_total: number;
-            matches: [string, string | null][];
-        };
-        Roles: [string, string][];
-    };
-    Education: string;
-    YearsOfExperience: [string, string | null, string][];
+export interface TaskResponse {
+    task_id: string;
+    task_status: string;
+    task_result: TaskResult;
 }
-export interface tailorResponse {
+export interface TailorResponse {
     name: string;
     id: string;
-    bullets: tailorBulletResponse[];
+    bullets: TailorBulletResponse[];
 }
-export interface tailorResponses extends Array<tailorResponse> {
+export interface TailorResponses extends Array<TailorResponse> {
 }
-export interface tailorBulletResponse {
+export interface TailorBulletResponse {
     bullet: string;
     keyword: string;
     tailored_bullet: string;
 }
-export interface regenerateResponse {
+export interface RegenerateResponse {
     regeneration_id: string;
     cover_letter?: string;
     questions?: any[];
@@ -70,15 +60,10 @@ declare class CoverQuick {
     private _api_key;
     private config;
     private request;
-    constructor(api_key: string);
-    cacheResume(resume: Resume): Promise<resumeResponse>;
-    updateResume(resume: Resume, resumeId: string): Promise<resumeResponse>;
-    cache<T>(dataId: string): Promise<T>;
-    classify(description: string): Promise<classifyResponse>;
-    generate(resumeId: string, descriptionId: string, questions?: string[], experience_level?: number): Promise<generateResponse>;
-    match(resumeId: string, descriptionId: string): Promise<matchResponse>;
-    tailor(resumeId: string, descriptionId: string): Promise<tailorResponses>;
-    tailorBullet(bullet: string, keyword: string): Promise<tailorBulletResponse>;
-    regenerate(regenerationId: string, coverLetter: boolean, questions?: string[]): Promise<regenerateResponse>;
+    constructor(api_key?: string, url?: string, version?: string);
+    application(resume: Resume, job_description: string, experience_level: number, questions: string[] | undefined, application_id: string): Promise<ApplicationResponse>;
+    task(task_id: string): Promise<ApplicationResponse>;
+    tailorBullet(bullet: string, keyword: string): Promise<TailorBulletResponse>;
+    regenerate(regenerationId: string, coverLetter: boolean, questions?: string[]): Promise<RegenerateResponse>;
 }
 export default CoverQuick;

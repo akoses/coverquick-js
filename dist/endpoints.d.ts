@@ -1,29 +1,9 @@
 declare const endpoints: {
-    cacheResume: {
+    application: {
         method: string;
         path: string;
     };
-    updateResume: (resumeId: string) => {
-        method: string;
-        path: string;
-    };
-    cache: (dataId: string) => {
-        method: string;
-        path: string;
-    };
-    classify: {
-        method: string;
-        path: string;
-    };
-    generate: {
-        method: string;
-        path: string;
-    };
-    match: {
-        method: string;
-        path: string;
-    };
-    tailor: {
+    task: (task_id: string) => {
         method: string;
         path: string;
     };

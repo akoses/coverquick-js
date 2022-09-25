@@ -7,11 +7,13 @@ let API_KEY = process.env.COVERQUICK_API_KEY;
 const coverQuick = new CoverQuick(API_KEY as string);
 
 export let resumeSample = {
+	
 	name: "John Doe",
 	company: "CoverQuick",
 	job_title: "Software Engineer",
 	experience: [
-		{
+		{	
+			id:"1",
 			title: "Software Engineer",
 			company: "CoverQuick",
 			bullets: [
@@ -38,24 +40,21 @@ export let resumeSample = {
 }
 
 describe(
-	"Test caching functionality", 
+	"Test application and tasks", 
 	() => {
-	it("should cache a resume", async () => {
-		
-		assert.doesNotReject(coverQuick.cacheResume(resumeSample));
+	it("should create an application", async () => {
+		assert.doesNotReject(coverQuick.application(
+			resumeSample,
+			"John Doe",
+			1,
+			[],
+			"test-id"
+		));
 	});
-
-	it("should update a resume", async () => {
-		let res = await coverQuick.cacheResume(resumeSample)
-		resumeSample.name = "Jane Doe";
-		
-		assert.doesNotReject(coverQuick.updateResume(resumeSample, res.resume_id));
+	it("Should test the task endpoint", async () => {
+		assert.doesNotReject(coverQuick.task("test-id"));
 	})
-
-	it("should get a cache random object", async () => {
-		
-		assert.doesNotReject(coverQuick.cache<{}>('hello world'))
-	})
+	
 }
 )
 
