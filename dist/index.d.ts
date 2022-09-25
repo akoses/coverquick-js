@@ -62,7 +62,7 @@ declare class CoverQuick {
     private request;
     constructor(api_key?: string, url?: string, version?: string);
     application(resume: Resume, job_description: string, experience_level: number, questions: string[] | undefined, application_id: string): Promise<ApplicationResponse>;
-    task(task_id: string): Promise<ApplicationResponse>;
+    task(task_id: string): Promise<TaskResponse>;
     tailorBullet(bullet: string, keyword: string): Promise<TailorBulletResponse>;
     regenerate(regenerationId: string, coverLetter: boolean, questions?: string[]): Promise<RegenerateResponse>;
 }

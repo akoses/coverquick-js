@@ -102,9 +102,9 @@ class CoverQuick {
 	return res.data as ApplicationResponse;
 }
   
-  public async task(task_id: string):Promise<ApplicationResponse> {
+  public async task(task_id: string):Promise<TaskResponse> {
 	let res = await this.request.call(endpoints.task(task_id).method, endpoints.task(task_id).path);
-	return res.data as ApplicationResponse;
+	return res.data as TaskResponse;
 }
 
   public async tailorBullet(
