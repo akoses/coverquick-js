@@ -1,5 +1,9 @@
 import axios, { AxiosInstance } from 'axios';
 
+export interface HeaderParams {
+	  [key: string]: string;
+}
+
 class Configuration {
 	private api_key: string;
 	public  api_url: string;
@@ -10,12 +14,15 @@ class Configuration {
 		this.api_key = api_key;
 		this.api_url = url;
 		this.api_version = api_version;
+		let headers:HeaderParams = {
+			'Content-Type': 'application/json',
+		}
+		if (api_key !== "") {
+			headers['x-api-key'] = api_key;
+		}
 		this.config = axios.create({
 			baseURL: `${this.api_url}/${this.api_version}`,
-			headers: {
-				'Content-Type': 'application/json',
-				'x-api-key': this.api_key
-			},
+			headers: headers,
 			timeout: 10000,
 		})
 	}
