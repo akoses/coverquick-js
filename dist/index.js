@@ -21,9 +21,9 @@ var TaskStatus;
     TaskStatus["FAILED"] = "FAILURE";
 })(TaskStatus || (TaskStatus = {}));
 class CoverQuick {
-    constructor(api_key = "", url = "https://api.coverquick.co", version = "beta") {
+    constructor(api_key = "", url = "https://api.coverquick.co") {
         this._api_key = api_key;
-        this.config = new configuration_1.default(this._api_key, url, version);
+        this.config = new configuration_1.default(this._api_key, url);
         this.request = new request_1.default(this.config);
     }
     application(resume, job_description, experience_level, questions = [], application_id) {

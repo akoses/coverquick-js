@@ -5,16 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = __importDefault(require("axios"));
 class Configuration {
-    constructor(api_key, url, api_version) {
+    constructor(api_key, url) {
         this.api_key = api_key;
         this.api_url = url;
-        this.api_version = api_version;
+        let headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${this.api_key}`
+        };
         this.config = axios_1.default.create({
-            baseURL: `${this.api_url}/${this.api_version}`,
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': this.api_key
-            },
+            baseURL: `${this.api_url}`,
+            headers: headers,
             timeout: 10000,
         });
     }

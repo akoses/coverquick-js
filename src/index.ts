@@ -78,9 +78,9 @@ class CoverQuick {
 	private config: Configuration;
 	private request: CoverQuickRequest;
 
-	constructor(api_key: string = "", url:string="https://api.coverquick.co", version:string="beta") {
+	constructor(api_key: string = "", url:string="https://api.coverquick.co") {
 	this._api_key = api_key;
-	this.config = new Configuration(this._api_key, url, version);
+	this.config = new Configuration(this._api_key, url);
 	this.request = new CoverQuickRequest(this.config);
   }
 

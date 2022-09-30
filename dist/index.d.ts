@@ -60,7 +60,7 @@ declare class CoverQuick {
     private _api_key;
     private config;
     private request;
-    constructor(api_key?: string, url?: string, version?: string);
+    constructor(api_key?: string, url?: string);
     application(resume: Resume, job_description: string, experience_level: number, questions: string[] | undefined, application_id: string): Promise<ApplicationResponse>;
     task(task_id: string): Promise<TaskResponse>;
     tailorBullet(bullet: string, keyword: string): Promise<TailorBulletResponse>;
