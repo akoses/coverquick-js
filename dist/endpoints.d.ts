@@ -1,5 +1,9 @@
 declare const endpoints: {
-    application: {
+    createJobDescription: {
+        method: string;
+        path: string;
+    };
+    createDocuments: {
         method: string;
         path: string;
     };
@@ -7,11 +11,15 @@ declare const endpoints: {
         method: string;
         path: string;
     };
-    tailorBullet: {
+    regenerate: {
         method: string;
         path: string;
     };
-    regenerate: {
+    application: {
+        method: string;
+        path: string;
+    };
+    tailorBullet: {
         method: string;
         path: string;
     };

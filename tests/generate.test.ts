@@ -1,4 +1,3 @@
-import {resumeSample} from "./application.test";
 import {strict as assert} from "node:assert";
 import {describe, it} from "node:test";
 import CoverQuick from "../src";

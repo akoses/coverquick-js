@@ -1,21 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const endpoints = {
-    application: {
+    createJobDescription: {
         method: 'post',
-        path: '/application'
+        path: '/description'
+    },
+    createDocuments: {
+        method: 'post',
+        path: '/documents'
     },
     task: (task_id) => ({
         method: 'get',
         path: '/task/' + task_id
     }),
+    regenerate: {
+        method: "post",
+        path: "/regenerate"
+    },
+    application: {
+        method: 'post',
+        path: '/application'
+    },
     tailorBullet: {
         method: "post",
         path: "/tailor/bullet"
     },
-    regenerate: {
-        method: "post",
-        path: "/regenerate"
-    }
 };
 exports.default = endpoints;

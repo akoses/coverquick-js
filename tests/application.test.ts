@@ -6,6 +6,7 @@ dotenv.config();
 let API_KEY = process.env.COVERQUICK_API_KEY;
 const coverQuick = new CoverQuick(API_KEY as string);
 
+
 export let resumeSample = {
 	
 	name: "John Doe",
@@ -39,15 +40,65 @@ export let resumeSample = {
 	
 }
 
+export const defaultResume = {
+	header:{
+		fullName: '',
+		phoneNumber: '',
+		email: '',
+		linkedin: '',
+		github: '',
+		personalWebsite: '',
+		role: '',
+		contact: {
+			city: '',
+			state: '',
+			country: ''
+		}
+	},
+	summary: {
+		text: '',
+		visible: false
+	},
+	education: {
+		education: []
+	},
+	experience: {
+		experience: [],
+	},
+	volunteer:{
+		volunteer: [],
+	},
+	skills: {
+		skills: [],
+	},
+	certifications: {
+		certifications: [],
+	},
+	projects: {
+		projects: [],
+	},
+	awards:{
+		awards: [],
+	},
+	references:{
+		references: [],
+	},
+	publications:{
+		publications: [],
+	},
+	accomplishments:{
+		text: '',
+		visible: false
+	}
+
+}
+
 describe(
-	"Test application and tasks", 
+	"Test documents and tasks", 
 	() => {
-	it("should create an application", async () => {
-		assert.doesNotReject(coverQuick.application(
-			resumeSample,
-			"John Doe",
-			1,
-			[],
+	it("should create a job description", async () => {
+		assert.doesNotReject(coverQuick.createJobDescription(
+			"Software Engineer",
 			"test-id"
 		));
 	});
@@ -55,6 +106,9 @@ describe(
 		assert.doesNotReject(coverQuick.task("test-id"));
 	})
 	
-}
-)
+	it("Should create documents", async () => {
+		assert.doesNotReject(coverQuick.createDocuments(
+			defaultResume, "job-1", {}))
+	})
 
+})

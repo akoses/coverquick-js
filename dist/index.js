@@ -26,6 +26,15 @@ class CoverQuick {
         this.config = new configuration_1.default(this._api_key, url);
         this.request = new request_1.default(this.config);
     }
+    /**
+     * @deprecated
+     * @param resume
+     * @param job_description
+     * @param experience_level
+     * @param questions
+     * @param application_id
+     * @returns
+     */
     application(resume, job_description, experience_level, questions = [], application_id) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.application.method, endpoints_1.default.application.path, {
@@ -38,15 +47,40 @@ class CoverQuick {
             return res.data;
         });
     }
-    task(task_id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.task(task_id).method, endpoints_1.default.task(task_id).path);
-            return res.data;
-        });
-    }
+    /**
+     * @deprecated
+     * @param bullet
+     * @param keyword
+     * @returns
+     */
     tailorBullet(bullet, keyword) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.tailorBullet.method, endpoints_1.default.tailorBullet.path, { bullet, keyword });
+            return res.data;
+        });
+    }
+    createJobDescription(description, jobId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield this.request.call(endpoints_1.default.createJobDescription.method, endpoints_1.default.createJobDescription.path, { description, job_id: jobId });
+            return res.data;
+        });
+    }
+    createDocuments(content, jobId, { coverLetter = true, resume = true, jobTitle = "", companyName = "", }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield this.request.call(endpoints_1.default.createDocuments.method, endpoints_1.default.createDocuments.path, {
+                content,
+                job_id: jobId,
+                cover_letter: coverLetter,
+                resume,
+                job_title: jobTitle,
+                company_name: companyName,
+            });
+            return res.data;
+        });
+    }
+    task(task_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield this.request.call(endpoints_1.default.task(task_id).method, endpoints_1.default.task(task_id).path);
             return res.data;
         });
     }
