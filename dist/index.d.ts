@@ -28,8 +28,14 @@ export interface ApplicationResponse {
     task_status: string;
 }
 export interface DocumentResponse {
-    task_id: string;
-    task_status: string;
+    cover_letter: {
+        task_id: string;
+        task_status: string;
+    };
+    resume: {
+        task_id: string;
+        task_status: string;
+    };
 }
 declare enum TaskStatus {
     SUCCESS = "SUCCESS",

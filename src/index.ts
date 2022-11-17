@@ -39,8 +39,14 @@ export interface ApplicationResponse {
 
 
 export interface DocumentResponse {
-	task_id: string;
-	task_status: string;
+	cover_letter:{
+		task_id: string;
+		task_status: string;
+	}
+	resume:{
+		task_id: string;
+		task_status: string;
+	}
 }
 
 enum TaskStatus {
@@ -138,6 +144,7 @@ return res.data as TailorBulletResponse;
   public async createJobDescription(description: string, jobId: string):Promise<JobDescriptionResponse> {
 	let res = await this.request.call(endpoints.createJobDescription.method, endpoints.createJobDescription.path, {description, job_id: jobId});
 	return res.data as JobDescriptionResponse;
+
   }
 
   public async createDocuments(content: Object, jobId: string, {
