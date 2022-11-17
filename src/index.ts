@@ -152,6 +152,8 @@ return res.data as TailorBulletResponse;
 	resume = true,	
 	jobTitle = "",
 	companyName = "",
+	type = "",
+	indicesState = {}
   }):Promise<DocumentResponse> {
 	let res = await this.request.call(endpoints.createDocuments.method, endpoints.createDocuments.path, {
 		content,
@@ -160,6 +162,8 @@ return res.data as TailorBulletResponse;
 		resume,
 		job_title: jobTitle,
 		company_name: companyName,
+		type,
+		indices_state: indicesState
 	});
 	return res.data as DocumentResponse;
   }
