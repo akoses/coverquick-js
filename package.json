@@ -1,6 +1,6 @@
 {
   "name": "coverquick",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "CoverQuick API JavaScript SDK",
   "main": "dist/index.js",
   "files": [

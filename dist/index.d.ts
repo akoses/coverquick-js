@@ -32,11 +32,12 @@ declare class CoverQuick {
      * @param companyName
      * @param type
      */
-    createResume(content: Object, jobId: string, { jobTitle, companyName, type, indicesState }: {
+    createResume(content: Object, jobId: string, { jobTitle, companyName, type, indicesState, jobDescription }: {
         jobTitle?: string | undefined;
         companyName?: string | undefined;
         type?: string | undefined;
         indicesState?: {} | undefined;
+        jobDescription?: string | undefined;
     }): Promise<DocumentResponse>;
     /**
      * @param content
@@ -46,10 +47,12 @@ declare class CoverQuick {
      * @param type
      * @returns
     */
-    createCoverLetter(content: Object, jobId: string, { jobTitle, companyName, type, }: {
+    createCoverLetter(content: Object, jobId: string, { jobTitle, companyName, type, name, jobDescription }: {
         jobTitle?: string | undefined;
         companyName?: string | undefined;
         type?: string | undefined;
+        name?: string | undefined;
+        jobDescription?: string | undefined;
     }): Promise<DocumentResponse>;
     task(task_id: string): Promise<TaskResponse>;
     /**
@@ -64,12 +67,13 @@ declare class CoverQuick {
      * @param indicesState
      * @returns
      */
-    createDocuments(content: Object, jobId: string, { coverLetter, resume, jobTitle, companyName, type, indicesState }: {
+    createDocuments(content: Object, jobId: string, { coverLetter, resume, jobTitle, companyName, type, name, indicesState }: {
         coverLetter?: boolean | undefined;
         resume?: boolean | undefined;
         jobTitle?: string | undefined;
         companyName?: string | undefined;
         type?: string | undefined;
+        name?: string | undefined;
         indicesState?: {} | undefined;
     }): Promise<DocumentResponse>;
 }

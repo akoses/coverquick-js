@@ -51,7 +51,7 @@ class CoverQuick {
      * @param companyName
      * @param type
      */
-    createResume(content, jobId, { jobTitle = "", companyName = "", type = "", indicesState = {} }) {
+    createResume(content, jobId, { jobTitle = "", companyName = "", type = "", indicesState = {}, jobDescription = "" }) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.createResume.method, endpoints_1.default.createResume.path, {
                 content,
@@ -61,6 +61,7 @@ class CoverQuick {
                 type,
                 indices_state: indicesState,
                 task_id: jobId + "_resume",
+                job_description: jobDescription,
             });
             return res.data;
         });
@@ -73,14 +74,15 @@ class CoverQuick {
      * @param type
      * @returns
     */
-    createCoverLetter(content, jobId, { jobTitle = "", companyName = "", type = "", }) {
+    createCoverLetter(content, jobId, { jobTitle = "", companyName = "", type = "", name = "", jobDescription = "" }) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.createCoverLetter.method, endpoints_1.default.createCoverLetter.path, {
                 content,
                 job_id: jobId,
                 job_title: jobTitle,
                 company_name: companyName,
-                type,
+                name,
+                job_description: jobDescription,
                 task_id: jobId + "_cover_letter",
             });
             return res.data;
@@ -104,13 +106,14 @@ class CoverQuick {
      * @param indicesState
      * @returns
      */
-    createDocuments(content, jobId, { coverLetter = true, resume = true, jobTitle = "", companyName = "", type = "", indicesState = {} }) {
+    createDocuments(content, jobId, { coverLetter = true, resume = true, jobTitle = "", companyName = "", type = "", name = "", indicesState = {} }) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.createDocuments.method, endpoints_1.default.createDocuments.path, {
                 content,
                 job_id: jobId,
                 cover_letter: coverLetter,
                 resume,
+                name,
                 job_title: jobTitle,
                 company_name: companyName,
                 type,
