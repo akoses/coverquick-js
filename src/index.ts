@@ -63,7 +63,8 @@ class CoverQuick {
 	jobTitle = "",
 	companyName = "",
 	type = "",
-	indicesState = {}
+	indicesState = {},
+	jobDescription = ""
   }):Promise<DocumentResponse> {
 	let res = await this.request.call(endpoints.createResume.method, endpoints.createResume.path, {
 		content,
@@ -73,6 +74,7 @@ class CoverQuick {
 		type,
 		indices_state: indicesState,
 		task_id: jobId + "_resume",
+		job_description: jobDescription,
 	});
 	return res.data as DocumentResponse;
   }
@@ -89,13 +91,16 @@ public async createCoverLetter(content: Object, jobId: string, {
 	jobTitle = "",
 	companyName = "",
 	type = "",
+	name = "",
+	jobDescription = ""
   }):Promise<DocumentResponse> {
 	let res = await this.request.call(endpoints.createCoverLetter.method, endpoints.createCoverLetter.path, {
 		content,
 		job_id: jobId,
 		job_title: jobTitle,
 		company_name: companyName,
-		type,
+		name,
+		job_description: jobDescription,
 		task_id: jobId + "_cover_letter",
 	});
 	return res.data as DocumentResponse;
@@ -125,6 +130,7 @@ public async createCoverLetter(content: Object, jobId: string, {
 	jobTitle = "",
 	companyName = "",
 	type = "",
+	name = "",
 	indicesState = {}
   }):Promise<DocumentResponse> {
 	let res = await this.request.call(endpoints.createDocuments.method, endpoints.createDocuments.path, {
@@ -132,6 +138,7 @@ public async createCoverLetter(content: Object, jobId: string, {
 		job_id: jobId,
 		cover_letter: coverLetter,
 		resume,
+		name,
 		job_title: jobTitle,
 		company_name: companyName,
 		type,
