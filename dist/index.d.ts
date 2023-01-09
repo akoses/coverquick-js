@@ -1,13 +1,12 @@
 export interface DocumentResponse {
     taskId: string;
     taskStatus: string;
-    taskResult: TaskResult;
 }
 export declare type TaskResult = any;
 export interface TaskResponse {
-    task_id: string;
-    task_status: string;
-    task_result: TaskResult;
+    taskId: string;
+    taskStatus: string;
+    taskResult: TaskResult;
 }
 export interface JobDescriptionResponse {
     status: string;
@@ -47,10 +46,9 @@ declare class CoverQuick {
      * @param type
      * @returns
     */
-    createCoverLetter(content: Object, jobId: string, { jobTitle, companyName, type, name, jobDescription }: {
+    createCoverLetter(content: Object, jobId: string, { jobTitle, companyName, name, jobDescription }: {
         jobTitle?: string | undefined;
         companyName?: string | undefined;
-        type?: string | undefined;
         name?: string | undefined;
         jobDescription?: string | undefined;
     }): Promise<DocumentResponse>;

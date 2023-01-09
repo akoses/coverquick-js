@@ -74,7 +74,7 @@ class CoverQuick {
      * @param type
      * @returns
     */
-    createCoverLetter(content, jobId, { jobTitle = "", companyName = "", type = "", name = "", jobDescription = "" }) {
+    createCoverLetter(content, jobId, { jobTitle = "", companyName = "", name = "", jobDescription = "" }) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.createCoverLetter.method, endpoints_1.default.createCoverLetter.path, {
                 content,
