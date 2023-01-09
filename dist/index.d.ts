@@ -1,105 +1,76 @@
-export interface Resume {
-    name: string;
-    company: string;
-    job_title: string;
-    experience: Experience[];
-    education: Education[];
-    skills: Skills[];
-}
-export interface Experience {
-    title: string;
-    company: string;
-    bullets: string[];
-    project: boolean;
-    id: string;
-}
-export interface Education {
-    school: string;
-    major: string;
-    year: number;
-    level: number;
-}
-export interface Skills {
-    name: string;
-    years_of_experience: number;
-}
-export interface ApplicationResponse {
-    task_id: string;
-    task_status: string;
-}
 export interface DocumentResponse {
-    cover_letter: {
-        task_id: string;
-        task_status: string;
-    };
-    resume: {
-        task_id: string;
-        task_status: string;
-    };
+    taskId: string;
+    taskStatus: string;
+    taskResult: TaskResult;
 }
-declare enum TaskStatus {
-    SUCCESS = "SUCCESS",
-    FAILED = "FAILURE"
-}
-export interface TaskResult {
-    STATUS: TaskStatus;
-}
+export declare type TaskResult = any;
 export interface TaskResponse {
     task_id: string;
     task_status: string;
     task_result: TaskResult;
 }
 export interface JobDescriptionResponse {
-    task_id: string;
-    task_status: string;
-}
-export interface TailorResponse {
-    name: string;
-    id: string;
-    bullets: TailorBulletResponse[];
-}
-export interface TailorResponses extends Array<TailorResponse> {
-}
-export interface TailorBulletResponse {
-    bullet: string;
-    keyword: string;
-    tailored_bullet: string;
-}
-export interface RegenerateResponse {
-    regeneration_id: string;
-    cover_letter?: string;
-    questions?: any[];
+    status: string;
 }
 declare class CoverQuick {
     private _api_key;
     private config;
     private request;
-    constructor(api_key?: string, url?: string);
+    constructor(api_key?: string, url?: string, version?: string);
     /**
-     * @deprecated
-     * @param resume
-     * @param job_description
-     * @param experience_level
-     * @param questions
-     * @param application_id
-     * @returns
+     * @param description
+     * @param jobId
+     * @returns JobDescriptionResponse
+     * @memberof CoverQuick
      */
-    application(resume: Resume, job_description: string, experience_level: number, questions: string[] | undefined, application_id: string): Promise<ApplicationResponse>;
-    /**
-     * @deprecated
-     * @param bullet
-     * @param keyword
-     * @returns
-     */
-    tailorBullet(bullet: string, keyword: string): Promise<TailorBulletResponse>;
     createJobDescription(description: string, jobId: string): Promise<JobDescriptionResponse>;
-    createDocuments(content: Object, jobId: string, { coverLetter, resume, jobTitle, companyName, }: {
+    checkAPIVersion(): Promise<string>;
+    /**
+     * @param content
+     * @param jobId
+     * @param jobTitle
+     * @param companyName
+     * @param type
+     */
+    createResume(content: Object, jobId: string, { jobTitle, companyName, type, indicesState }: {
+        jobTitle?: string | undefined;
+        companyName?: string | undefined;
+        type?: string | undefined;
+        indicesState?: {} | undefined;
+    }): Promise<DocumentResponse>;
+    /**
+     * @param content
+     * @param jobId
+     * @param jobTitle
+     * @param companyName
+     * @param type
+     * @returns
+    */
+    createCoverLetter(content: Object, jobId: string, { jobTitle, companyName, type, }: {
+        jobTitle?: string | undefined;
+        companyName?: string | undefined;
+        type?: string | undefined;
+    }): Promise<DocumentResponse>;
+    task(task_id: string): Promise<TaskResponse>;
+    /**
+     * @deprecated
+     * @param content
+     * @param jobId
+     * @param coverLetter
+     * @param resume
+     * @param jobTitle
+     * @param companyName
+     * @param type
+     * @param indicesState
+     * @returns
+     */
+    createDocuments(content: Object, jobId: string, { coverLetter, resume, jobTitle, companyName, type, indicesState }: {
         coverLetter?: boolean | undefined;
         resume?: boolean | undefined;
         jobTitle?: string | undefined;
         companyName?: string | undefined;
+        type?: string | undefined;
+        indicesState?: {} | undefined;
     }): Promise<DocumentResponse>;
-    task(task_id: string): Promise<TaskResponse>;
-    regenerate(regenerationId: string, coverLetter: boolean, questions?: string[]): Promise<RegenerateResponse>;
 }
 export default CoverQuick;

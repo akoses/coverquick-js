@@ -7,19 +7,19 @@ declare const endpoints: {
         method: string;
         path: string;
     };
+    createResume: {
+        method: string;
+        path: string;
+    };
     task: (task_id: string) => {
         method: string;
         path: string;
     };
-    regenerate: {
+    createCoverLetter: {
         method: string;
         path: string;
     };
-    application: {
-        method: string;
-        path: string;
-    };
-    tailorBullet: {
+    checkAPIVersion: {
         method: string;
         path: string;
     };

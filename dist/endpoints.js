@@ -9,21 +9,21 @@ const endpoints = {
         method: 'post',
         path: '/documents'
     },
+    createResume: {
+        method: 'post',
+        path: '/resume'
+    },
     task: (task_id) => ({
         method: 'get',
         path: '/task/' + task_id
     }),
-    regenerate: {
+    createCoverLetter: {
         method: "post",
-        path: "/regenerate"
+        path: "/cover-letter"
     },
-    application: {
-        method: 'post',
-        path: '/application'
-    },
-    tailorBullet: {
-        method: "post",
-        path: "/tailor/bullet"
-    },
+    checkAPIVersion: {
+        method: "get",
+        path: "/"
+    }
 };
 exports.default = endpoints;

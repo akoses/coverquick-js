@@ -15,65 +15,73 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const configuration_1 = __importDefault(require("./configuration"));
 const request_1 = __importDefault(require("./request"));
 const endpoints_1 = __importDefault(require("./endpoints"));
-var TaskStatus;
-(function (TaskStatus) {
-    TaskStatus["SUCCESS"] = "SUCCESS";
-    TaskStatus["FAILED"] = "FAILURE";
-})(TaskStatus || (TaskStatus = {}));
 class CoverQuick {
-    constructor(api_key = "", url = "https://api.coverquick.co") {
+    constructor(api_key = "", url = "https://api.coverquick.co", version = "v1") {
         this._api_key = api_key;
-        this.config = new configuration_1.default(this._api_key, url);
+        this.config = new configuration_1.default(this._api_key, url, version);
         this.request = new request_1.default(this.config);
     }
     /**
-     * @deprecated
-     * @param resume
-     * @param job_description
-     * @param experience_level
-     * @param questions
-     * @param application_id
-     * @returns
+     * @param description
+     * @param jobId
+     * @returns JobDescriptionResponse
+     * @memberof CoverQuick
      */
-    application(resume, job_description, experience_level, questions = [], application_id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.application.method, endpoints_1.default.application.path, {
-                resume,
-                job_description,
-                experience_level,
-                questions,
-                application_id
-            });
-            return res.data;
-        });
-    }
-    /**
-     * @deprecated
-     * @param bullet
-     * @param keyword
-     * @returns
-     */
-    tailorBullet(bullet, keyword) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.tailorBullet.method, endpoints_1.default.tailorBullet.path, { bullet, keyword });
-            return res.data;
-        });
-    }
     createJobDescription(description, jobId) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.createJobDescription.method, endpoints_1.default.createJobDescription.path, { description, job_id: jobId });
             return res.data;
         });
     }
-    createDocuments(content, jobId, { coverLetter = true, resume = true, jobTitle = "", companyName = "", }) {
+    checkAPIVersion() {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.createDocuments.method, endpoints_1.default.createDocuments.path, {
+            try {
+                let res = yield this.request.call(endpoints_1.default.checkAPIVersion.method, endpoints_1.default.checkAPIVersion.path);
+                return res.data;
+            }
+            catch (e) {
+                return "unknown";
+            }
+        });
+    }
+    /**
+     * @param content
+     * @param jobId
+     * @param jobTitle
+     * @param companyName
+     * @param type
+     */
+    createResume(content, jobId, { jobTitle = "", companyName = "", type = "", indicesState = {} }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield this.request.call(endpoints_1.default.createResume.method, endpoints_1.default.createResume.path, {
                 content,
                 job_id: jobId,
-                cover_letter: coverLetter,
-                resume,
                 job_title: jobTitle,
                 company_name: companyName,
+                type,
+                indices_state: indicesState,
+                task_id: jobId + "_resume",
+            });
+            return res.data;
+        });
+    }
+    /**
+     * @param content
+     * @param jobId
+     * @param jobTitle
+     * @param companyName
+     * @param type
+     * @returns
+    */
+    createCoverLetter(content, jobId, { jobTitle = "", companyName = "", type = "", }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield this.request.call(endpoints_1.default.createCoverLetter.method, endpoints_1.default.createCoverLetter.path, {
+                content,
+                job_id: jobId,
+                job_title: jobTitle,
+                company_name: companyName,
+                type,
+                task_id: jobId + "_cover_letter",
             });
             return res.data;
         });
@@ -84,9 +92,30 @@ class CoverQuick {
             return res.data;
         });
     }
-    regenerate(regenerationId, coverLetter, questions = []) {
+    /**
+     * @deprecated
+     * @param content
+     * @param jobId
+     * @param coverLetter
+     * @param resume
+     * @param jobTitle
+     * @param companyName
+     * @param type
+     * @param indicesState
+     * @returns
+     */
+    createDocuments(content, jobId, { coverLetter = true, resume = true, jobTitle = "", companyName = "", type = "", indicesState = {} }) {
         return __awaiter(this, void 0, void 0, function* () {
-            let res = yield this.request.call(endpoints_1.default.regenerate.method, endpoints_1.default.regenerate.path, { regeneration_id: regenerationId, cover_letter: coverLetter, questions });
+            let res = yield this.request.call(endpoints_1.default.createDocuments.method, endpoints_1.default.createDocuments.path, {
+                content,
+                job_id: jobId,
+                cover_letter: coverLetter,
+                resume,
+                job_title: jobTitle,
+                company_name: companyName,
+                type,
+                indices_state: indicesState
+            });
             return res.data;
         });
     }

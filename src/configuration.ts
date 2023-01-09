@@ -7,11 +7,13 @@ export interface HeaderParams {
 class Configuration {
 	private api_key: string;
 	public  api_url: string;
+	private version: string;
 	
 	private config: AxiosInstance;
-	constructor(api_key: string, url: string) {
+	constructor(api_key: string, url: string, version: string = 'v1') {
 		this.api_key = api_key;
 		this.api_url = url;
+		this.version = version;
 		
 		let headers:HeaderParams = {
 			'Content-Type': 'application/json',
@@ -19,7 +21,7 @@ class Configuration {
 		}
 		
 		this.config = axios.create({
-			baseURL: `${this.api_url}`,
+			baseURL: `${this.api_url}/${this.version}`,
 			headers: headers,
 			timeout: 10000,
 		})
