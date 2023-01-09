@@ -5,15 +5,14 @@ import endpoints from "./endpoints";
 export interface DocumentResponse {
 	taskId: string;
 	taskStatus: string;
-	taskResult: TaskResult;
 }
 
 export type TaskResult = any;
 
 export interface TaskResponse {
-	task_id: string;
-	task_status: string;
-	task_result: TaskResult;
+	taskId: string;
+	taskStatus: string;
+	taskResult: TaskResult;
 }
 
 export interface JobDescriptionResponse {
@@ -90,7 +89,6 @@ class CoverQuick {
 public async createCoverLetter(content: Object, jobId: string, {
 	jobTitle = "",
 	companyName = "",
-	type = "",
 	name = "",
 	jobDescription = ""
   }):Promise<DocumentResponse> {
