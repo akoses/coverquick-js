@@ -88,6 +88,40 @@ class CoverQuick {
             return res.data;
         });
     }
+    /**
+   * @param content
+   * @param jobId
+   * @param jobTitle
+   * @param companyName
+   * @param type
+   * @returns
+  */
+    createResumeCoverLetter(content, jobId, { jobTitle = "", companyName = "", name = "", jobDescription = "", type = "", indicesState = {} }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let res = yield this.request.call(endpoints_1.default.createResumeCoverLetter.method, endpoints_1.default.createResumeCoverLetter.path, {
+                resume: {
+                    content,
+                    job_id: jobId,
+                    job_title: jobTitle,
+                    company_name: companyName,
+                    type,
+                    indices_state: indicesState,
+                    task_id: jobId + "_resume_cover_letter",
+                    job_description: jobDescription,
+                },
+                cover_letter: {
+                    content,
+                    job_id: jobId,
+                    job_title: jobTitle,
+                    company_name: companyName,
+                    name,
+                    job_description: jobDescription,
+                    task_id: jobId + "_resume_cover_letter",
+                }
+            });
+            return res.data;
+        });
+    }
     task(task_id) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.task(task_id).method, endpoints_1.default.task(task_id).path);

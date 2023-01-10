@@ -52,6 +52,22 @@ declare class CoverQuick {
         name?: string | undefined;
         jobDescription?: string | undefined;
     }): Promise<DocumentResponse>;
+    /**
+   * @param content
+   * @param jobId
+   * @param jobTitle
+   * @param companyName
+   * @param type
+   * @returns
+  */
+    createResumeCoverLetter(content: Object, jobId: string, { jobTitle, companyName, name, jobDescription, type, indicesState }: {
+        jobTitle?: string | undefined;
+        companyName?: string | undefined;
+        name?: string | undefined;
+        jobDescription?: string | undefined;
+        type?: string | undefined;
+        indicesState?: {} | undefined;
+    }): Promise<DocumentResponse>;
     task(task_id: string): Promise<TaskResponse>;
     /**
      * @deprecated

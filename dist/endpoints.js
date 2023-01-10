@@ -21,6 +21,10 @@ const endpoints = {
         method: "post",
         path: "/cover-letter"
     },
+    createResumeCoverLetter: {
+        method: "post",
+        path: "/resume-cover-letter"
+    },
     checkAPIVersion: {
         method: "get",
         path: "/"

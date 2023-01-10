@@ -103,6 +103,47 @@ public async createCoverLetter(content: Object, jobId: string, {
 	});
 	return res.data as DocumentResponse;
   }
+
+
+  /**
+ * @param content
+ * @param jobId
+ * @param jobTitle
+ * @param companyName
+ * @param type
+ * @returns 
+*/  
+public async createResumeCoverLetter(content: Object, jobId: string, {
+	jobTitle = "",
+	companyName = "",
+	name = "",
+	jobDescription = "",
+	type = "",
+	indicesState = {}
+  }):Promise<DocumentResponse> {
+	let res = await this.request.call(endpoints.createResumeCoverLetter.method, endpoints.createResumeCoverLetter.path, {
+		resume: {
+			content,
+			job_id: jobId,
+			job_title: jobTitle,
+			company_name: companyName,
+			type,
+			indices_state: indicesState,
+			task_id: jobId + "_resume_cover_letter",
+			job_description: jobDescription,
+		},
+		cover_letter: {
+			content,
+			job_id: jobId,
+			job_title: jobTitle,
+			company_name: companyName,
+			name,
+			job_description: jobDescription,
+			task_id: jobId + "_resume_cover_letter",
+		}
+	});
+	return res.data as DocumentResponse;
+  }
   
   public async task(task_id: string):Promise<TaskResponse> {
 	let res = await this.request.call(endpoints.task(task_id).method, endpoints.task(task_id).path);

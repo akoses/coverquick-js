@@ -19,6 +19,10 @@ declare const endpoints: {
         method: string;
         path: string;
     };
+    createResumeCoverLetter: {
+        method: string;
+        path: string;
+    };
     checkAPIVersion: {
         method: string;
         path: string;
