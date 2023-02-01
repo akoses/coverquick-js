@@ -1,6 +1,24 @@
+import { ResumeProps, IndicesStateProps } from "./types";
 export interface DocumentResponse {
     taskId: string;
     taskStatus: string;
+}
+export interface CoverLetterResponse {
+    coverLetter: string;
+    status: string;
+    questions: string[];
+    regenerationId: string;
+}
+export interface ResumeResponse {
+    resume: {
+        content: ResumeProps;
+        indicesState: IndicesStateProps;
+    };
+    status: string;
+}
+export interface ResumeCoverLetterResponse {
+    resume: ResumeResponse;
+    coverLetter: CoverLetterResponse;
 }
 export declare type TaskResult = any;
 export interface TaskResponse {
@@ -37,7 +55,7 @@ declare class CoverQuick {
         type?: string | undefined;
         indicesState?: {} | undefined;
         jobDescription?: string | undefined;
-    }): Promise<DocumentResponse>;
+    }): Promise<ResumeResponse>;
     /**
      * @param content
      * @param jobId
@@ -51,7 +69,7 @@ declare class CoverQuick {
         companyName?: string | undefined;
         name?: string | undefined;
         jobDescription?: string | undefined;
-    }): Promise<DocumentResponse>;
+    }): Promise<CoverLetterResponse>;
     /**
    * @param content
    * @param jobId
@@ -67,7 +85,12 @@ declare class CoverQuick {
         jobDescription?: string | undefined;
         type?: string | undefined;
         indicesState?: {} | undefined;
-    }): Promise<DocumentResponse>;
+    }): Promise<ResumeCoverLetterResponse>;
+    /**
+     * @deprecated
+     * @param task_id
+     * @returns
+     */
     task(task_id: string): Promise<TaskResponse>;
     /**
      * @deprecated

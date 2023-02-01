@@ -1,11 +1,33 @@
 import Configuration from "./configuration";
 import CoverQuickRequest from "./request";
 import endpoints from "./endpoints";
+import { ResumeProps, IndicesStateProps } from "./types";
 
 export interface DocumentResponse {
 	taskId: string;
 	taskStatus: string;
 }
+
+export interface CoverLetterResponse {
+	coverLetter: string;
+	status: string;
+	questions: string[];
+	regenerationId: string;
+}
+
+export interface ResumeResponse {
+	resume: {
+		content: ResumeProps;
+		indicesState: IndicesStateProps;
+	};
+	status: string; 
+}
+
+export interface ResumeCoverLetterResponse {
+	resume: ResumeResponse;
+	coverLetter: CoverLetterResponse;
+}
+
 
 export type TaskResult = any;
 
@@ -64,7 +86,7 @@ class CoverQuick {
 	type = "",
 	indicesState = {},
 	jobDescription = ""
-  }):Promise<DocumentResponse> {
+  }):Promise<ResumeResponse> {
 	let res = await this.request.call(endpoints.createResume.method, endpoints.createResume.path, {
 		content,
 		job_id: jobId,
@@ -75,7 +97,7 @@ class CoverQuick {
 		task_id: jobId + "_resume",
 		job_description: jobDescription,
 	});
-	return res.data as DocumentResponse;
+	return res.data as ResumeResponse;
   }
 
 /**
@@ -91,7 +113,7 @@ public async createCoverLetter(content: Object, jobId: string, {
 	companyName = "",
 	name = "",
 	jobDescription = ""
-  }):Promise<DocumentResponse> {
+  }):Promise<CoverLetterResponse> {
 	let res = await this.request.call(endpoints.createCoverLetter.method, endpoints.createCoverLetter.path, {
 		content,
 		job_id: jobId,
@@ -101,7 +123,7 @@ public async createCoverLetter(content: Object, jobId: string, {
 		job_description: jobDescription,
 		task_id: jobId + "_cover_letter",
 	});
-	return res.data as DocumentResponse;
+	return res.data as CoverLetterResponse;
   }
 
 
@@ -120,7 +142,7 @@ public async createResumeCoverLetter(content: Object, jobId: string, {
 	jobDescription = "",
 	type = "",
 	indicesState = {}
-  }):Promise<DocumentResponse> {
+  }):Promise<ResumeCoverLetterResponse> {
 	let res = await this.request.call(endpoints.createResumeCoverLetter.method, endpoints.createResumeCoverLetter.path, {
 		resume: {
 			content,
@@ -142,9 +164,16 @@ public async createResumeCoverLetter(content: Object, jobId: string, {
 			task_id: jobId + "_resume_cover_letter",
 		}
 	});
-	return res.data as DocumentResponse;
+	return res.data as ResumeCoverLetterResponse;
   }
+
   
+  
+  /**
+   * @deprecated
+   * @param task_id 
+   * @returns 
+   */
   public async task(task_id: string):Promise<TaskResponse> {
 	let res = await this.request.call(endpoints.task(task_id).method, endpoints.task(task_id).path);
 	return res.data as TaskResponse;

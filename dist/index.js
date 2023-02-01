@@ -122,6 +122,11 @@ class CoverQuick {
             return res.data;
         });
     }
+    /**
+     * @deprecated
+     * @param task_id
+     * @returns
+     */
     task(task_id) {
         return __awaiter(this, void 0, void 0, function* () {
             let res = yield this.request.call(endpoints_1.default.task(task_id).method, endpoints_1.default.task(task_id).path);
